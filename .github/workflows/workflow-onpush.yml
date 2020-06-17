@@ -4,6 +4,8 @@ jobs:
   lint: 
     runs-on: ubuntu-latest
     steps:
+    - name: testing system commands
+      run: echo 'Hello world'
     - name: Code Checkout
       uses: actions/checkout@v2
     - name: Use Node.js
@@ -13,4 +15,15 @@ jobs:
     - run: npm install 
     - run: npx eslint handler.js 
   
-  
+  unittest:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Code Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install 
+    - name: running jest for unit testing
+      run: jest

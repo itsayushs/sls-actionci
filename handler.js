@@ -14,3 +14,6 @@ module.exports.hello = async event => {
   };
 
 };
+
+// Testing this function locally 
+// console.log(typeof this.hello('ayush'));

@@ -5,7 +5,8 @@
   "main": "handler.js",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.2.0"
+    "eslint": "^7.2.0",
+    "jest": "^26.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
