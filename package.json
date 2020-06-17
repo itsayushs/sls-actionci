@@ -1,0 +1,15 @@
+{
+  "name": "sls-actions",
+  "version": "1.0.0",
+  "description": "testing sls ci on github actions",
+  "main": "handler.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "itsayushs",
+  "license": "ISC"
+}
