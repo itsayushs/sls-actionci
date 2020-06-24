@@ -51,8 +51,16 @@ jobs:
       run: terraform init
     # - run: cd terraform/dev
     - name: doing a tfapply
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
+        AWS_DEFAULT_REGION: ap-south-1
       run: terraform apply -auto-approve
     - name: waiting 5mins
       run: sleep 300
     - name: tf destroy
       run: terrafrom destroy -force
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
+        AWS_DEFAULT_REGION: ap-south-1
