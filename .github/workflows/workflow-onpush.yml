@@ -59,7 +59,7 @@ jobs:
     - name: waiting 5mins
       run: sleep 300
     - name: tf destroy
-      run: terrafrom destroy -force
+      run: terraform destroy -force
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
