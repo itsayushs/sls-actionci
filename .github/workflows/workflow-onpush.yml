@@ -30,6 +30,11 @@ jobs:
 
   tfdeploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform/dev
+
     steps:
     - name: Code Checkout
       uses: actions/checkout@v2
@@ -41,9 +46,10 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
         AWS_DEFAULT_REGION: ap-south-1
+    - run: ls -la
     - name: Terraform Init
       run: terraform init
-    - run: cd terraform/dev
+    # - run: cd terraform/dev
     - name: doing a tfapply
       run: terraform apply -auto-approve
     - name: waiting 5mins
