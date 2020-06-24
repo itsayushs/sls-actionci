@@ -1,0 +1,1 @@
+instance_name = "github-actions-ec2"
