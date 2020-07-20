@@ -28,7 +28,7 @@ jobs:
     - name: running jest for unit testing
       run: npx jest
 
-    deploy:
+  deploy:
     name: deploy
     runs-on: ubuntu-latest
     steps:
