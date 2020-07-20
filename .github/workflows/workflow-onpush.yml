@@ -45,7 +45,14 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
-
+    - run: sleep 120
+    - name: serverless remove
+      uses: serverless/github-action@master
+      with:
+        args: remove
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
   # tfdeploy:
   #   runs-on: ubuntu-latest
   #   defaults:
