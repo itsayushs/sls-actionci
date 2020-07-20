@@ -28,39 +28,55 @@ jobs:
     - name: running jest for unit testing
       run: npx jest
 
-  tfdeploy:
+    deploy:
+    name: deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: terraform/dev
-
     steps:
-    - name: Code Checkout
-      uses: actions/checkout@v2
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+    - uses: actions/checkout@master
+    - name: npm install
+      uses: actions/npm@master
       with:
-        terraform_version: 0.11.0
+        args: install
+    - name: serverless deploy
+      uses: serverless/github-action@master
+      with:
+        args: deploy
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
-        AWS_DEFAULT_REGION: ap-south-1
-    - run: ls -la
-    - name: Terraform Init
-      run: terraform init
-    # - run: cd terraform/dev
-    - name: doing a tfapply
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
-        AWS_DEFAULT_REGION: ap-south-1
-      run: terraform apply -auto-approve
-    - name: waiting 5mins
-      run: sleep 300
-    - name: tf destroy
-      run: terraform destroy -force
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
-        AWS_DEFAULT_REGION: ap-south-1
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+
+  # tfdeploy:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #       working-directory: terraform/dev
+  #   steps:
+  #   - name: Code Checkout
+  #     uses: actions/checkout@v2
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v1
+  #     with:
+  #       terraform_version: 0.11.0
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
+  #       AWS_DEFAULT_REGION: ap-south-1
+  #   - run: ls -la
+  #   - name: Terraform Init
+  #     run: terraform init
+  #   # - run: cd terraform/dev
+  #   - name: doing a tfapply
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
+  #       AWS_DEFAULT_REGION: ap-south-1
+  #     run: terraform apply -auto-approve
+  #   - name: waiting 5mins
+  #     run: sleep 300
+  #   - name: tf destroy
+  #     run: terraform destroy -force
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET}}
+  #       AWS_DEFAULT_REGION: ap-south-1
