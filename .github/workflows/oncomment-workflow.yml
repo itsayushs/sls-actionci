@@ -1,0 +1,12 @@
+on:
+  pull_request_review_comment:
+    types: [created]
+    steps:
+jobs:
+  testing_event:
+    name: testevnt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing event
+        if: github.event.issue.comment.body == "PrintMe" 
+        run: echo 'the print action was triggered! success!'
