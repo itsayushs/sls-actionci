@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing event
-        if: github.event.issue.comment.body == "PrintMe" 
+        if: github.event.pull_request_review_comment.comment.body == "PrintMe" 
         run: echo 'the print action was triggered! success!'
