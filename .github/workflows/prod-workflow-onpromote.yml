@@ -1,0 +1,50 @@
+name: Master Branch [Promotion from dev]
+on:
+  pull_request:
+    types: closed
+    branches:
+      - master
+jobs:
+  lint_and_test: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: testing system commands
+      run: echo 'Hello world'
+    - name: Code Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install
+    - run: echo "Linting the code" 
+    - run: npx eslint handler.js
+    - run: echo "Unit Testing code" 
+    - run: npx jest
+  
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: npm install
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install 
+    - run: echo "Using Dev_credentials"
+    - name: serverless deploy
+      uses: serverless/github-action@master
+      with:
+        args: deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_PROD }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_PROD }}
+    - run: sleep 120
+    - name: serverless remove
+      uses: serverless/github-action@master
+      with:
+        args: remove
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_PROD }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_PROD }}
