@@ -1,11 +1,15 @@
+# on:
+#   pull_request_review_comment:
+#     types: created
 on:
-  pull_request_review_comment:
-    types: created
+  issue_comment:
+    types: [created, edited, deleted]
 jobs:
   testing_event:
+    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, 'PrintMe')
     name: testevnt
     runs-on: ubuntu-latest
-    if: github.event.pull_request_review_comment.comment.body == "PrintMe" 
+    # if: github.event.pull_request_review_comment.comment.body == "PrintMe" 
     steps:
       - name: Testing event
         run: echo 'the print action was triggered! success!'
