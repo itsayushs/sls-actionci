@@ -2,6 +2,10 @@
 #   pull_request_review_comment:
 #     types: created
 on:
+  pull_request:
+    branches:
+      - master
+      - dev
   issue_comment:
     types: [created, edited, deleted]
 jobs:
@@ -13,3 +17,11 @@ jobs:
     steps:
       - name: Testing event
         run: echo 'the print action was triggered! success!'
+      - name: post a PR comment! 
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "Woah!! This is a automatic comment by action!"
+          check_for_duplicate_msg: false
+
