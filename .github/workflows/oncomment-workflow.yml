@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: Testing event
         run: echo 'the print action was triggered! success!'
+  testing_autocomment:    
+    name: testing_autocomment
+    runs-on: ubuntu-latest
+    steps:
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@master
         with:
