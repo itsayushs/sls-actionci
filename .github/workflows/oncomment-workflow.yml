@@ -1,15 +1,29 @@
+# # on:
+# #   pull_request_review_comment:
+# #     types: created
 # on:
-#   pull_request_review_comment:
-#     types: created
-on:
-  issue_comment:
-    types: [created, edited, deleted]
-jobs:
-  testing_event:
-    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, 'PrintMe')
-    name: testevnt
-    runs-on: ubuntu-latest
-    # if: github.event.pull_request_review_comment.comment.body == "PrintMe" 
-    steps:
-      - name: Testing event
-        run: echo 'the print action was triggered! success!'
+#   pull_request:
+#     branches:
+#       - master
+#       - dev
+#   issue_comment:
+#     types: [created, edited, deleted]
+# jobs:
+#   testing_event:
+#     if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, 'PrintMe')
+#     name: testevnt
+#     runs-on: ubuntu-latest
+#     # if: github.event.pull_request_review_comment.comment.body == "PrintMe" 
+#     steps:
+#       - name: Testing event
+#         run: echo 'the print action was triggered! success!'
+#   testing_autocomment:    
+#     name: testing_autocomment
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Comment PR
+#         uses: thollander/actions-comment-pull-request@master
+#         with:
+#           message: 'Example of message !'
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
