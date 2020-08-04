@@ -1,0 +1,14 @@
+name: PR to Dev
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    branches:
+      - dev
+jobs:
+  lint_and_test: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Code Checkout
+      uses: actions/checkout@v2
+    - name: Cat readme
+      run: 'cat README.md'
